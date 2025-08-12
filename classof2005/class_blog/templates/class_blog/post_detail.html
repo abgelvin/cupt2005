@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'class_blog/styles.css' %}">
+</head>
+<body>
+    {% include 'class_blog/base.html' %}
+    
+    <div class="post-detail">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+        <p><em>Posted by {{ post.author }} on {{ post.created_at }}</em></p>
+
+        <h2>Comments</h2>
+        <div class="comments">
+            {% for comment in post.comments.all %}
+                <div class="comment">
+                    <p><strong>{{ comment.author }}:</strong> {{ comment.content }}</p>
+                    <p><em>Posted on {{ comment.created_at }}</em></p>
+                    {% if user.is_authenticated and comment.author == user.username %}
+                        <a href="{% url 'edit_comment' comment.id %}">Edit</a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+
+        <h2>Leave a Comment</h2>
+        <form action="{% url 'add_comment' post.id %}" method="post">
+            {% csrf_token %}
+            <textarea name="content" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

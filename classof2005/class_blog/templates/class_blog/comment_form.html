@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Form</title>
+</head>
+<body>
+    <h2>Leave a Comment</h2>
+    <form method="post" action="{% url 'class_blog:comment_create' post.id %}">
+        {% csrf_token %}
+        <div>
+            <label for="content">Comment:</label>
+            <textarea id="content" name="content" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
