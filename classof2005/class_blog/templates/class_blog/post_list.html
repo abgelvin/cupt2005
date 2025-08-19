@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends "class_blog/base.html" %}
 
-<html lang="en">
+{% load static %}
+{% block title %}Blog Posts{% endblock %}
+{% block content %}
+<div class="container">
+{% comment %} <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posts</title>
     <link rel="stylesheet" href="{% static 'class_blog/styles.css' %}">
 </head>
 <body>
-    {% include 'class_blog/base.html' %}
+    {% include 'class_blog/base.html' %} {% endcomment %}
     
     <div class="container">
         <h1>Blog Posts</h1>
@@ -25,3 +27,4 @@
     </div>
 </body>
 </html>
+{% endblock %}
